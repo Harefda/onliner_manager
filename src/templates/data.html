@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/css/main.css') }}" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+  {% block content %}
+  {% if cookie %}
+      {% if user.client_secret == None %}
+      <div class="ui middle aligned center aligned grid">
+          <div class="column">
+            <h2 class="ui image header">
+              <div class="content">
+                Введите cliend id и client secret для доступа к вашим товарам
+              </div>
+            </h2>
+            <form action="/user/put/onlinerInfo" method="post" class="ui large form">
+              <div class="ui stacked secondary  segment">
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="client_id" placeholder="Client id">
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="client_secret" placeholder="Client cecret">
+                  </div>
+                </div>
+                <button><div class="ui fluid large teal submit button">Подтвердить</div></button>
+              </div>
+        
+              <div class="ui error message"></div>
+              <p></p>
+            </form>
+      {% elif not user.user_option %}  
+            <div class="ui middle aligned center aligned grid">
+              <div class="column">
+                <h2 class="ui image header">
+                  <div class="content">
+                    Введите курсы доллара и евро, относительно которых установлены текущие цены 
+                  </div>
+                </h2>
+                <form action="/user/setup" method="post" class="ui large form">
+                  <div class="ui stacked secondary  segment">
+                    <div class="field">
+                      <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="old_eur_rate" placeholder="старый курс евро">
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="old_usd_rate" placeholder="старый курс доллара">
+                      </div>
+                    </div>
+                    <div class="field">
+                      <h3>
+                        Производители:
+                        {% for vendor in vendors %}
+                          {{vendor}},
+                        {% endfor %}
+                      </h3>
+                      <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="vendors_eur" placeholder="вендоры, работающий с евро">
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="vendors_usd" placeholder="вендоры, работающий с долларом">
+                      </div>
+                    </div>
+                    <button><div class="ui fluid large teal submit button">Подтвердить</div></button>
+                  </div>
+            
+                  <div class="ui error message"></div>
+                  <p></p>
+                </form>
+
+            <div class="ui message">
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="ui fluid large teal submit button">Вы уже ввели все нужные данные</div>
+      {% endif %}
+    {% else %}
+      <div class="ui fluid large teal submit button">Вы должны войти в свой аккаунт, чтобы получиться доступ к этой странице</div>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

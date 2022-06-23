@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dotenv = "*"
+fastapi = "*"
+uvicorn = "*"
+httpx = "*"
+typefit = "*"
+asyncpg = "*"
+passlib = {extras = ["bcrypt"], version = "*"}
+tortoise-orm = { extras = ["asyncpg"], version = "*" }
+aerich = "*"
+pydantic = {extras = ["email"], version = "*"}
+jinja2 = "*"
+python-multipart = "*"
+email-validator = "*"
+python-jose = "*"
+pytest-xdist = "*"
+pytest-asyncio = "*"
+pytest-mock = "*"
+pytest-cov = "*"
+asynctest = "*"
+pytest-env = "*"
+pytest = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

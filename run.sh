@@ -1,0 +1,1 @@
+uvicorn app:app --app-dir=src --reload
